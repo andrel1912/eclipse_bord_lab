@@ -5,7 +5,8 @@ import os
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
 
-st.title("eClipseBord")
+st.markdown(
+    '<h1 style="color:#FF0000A6;">eClipseBord</h1>', unsafe_allow_html=True)
 
 response = httpx.get(f"{BACKEND_URL}/data", timeout=30)
 
@@ -22,7 +23,10 @@ if response.status_code == 200:
         errors="coerce"
     )
 
-    st.header("Explore Solar Eclipses")
+    st.markdown(
+    '<h2 style="color:#E58A3A;">Explore Solar Eclipses</h2>',
+    unsafe_allow_html=True
+)
 
     col1, col2 = st.columns(2)
 
@@ -50,13 +54,13 @@ if response.status_code == 200:
 
     st.write(f"{len(filtered_df):,} eclipses found")
 
-    st.header("Eclipse frequency")
+    st.markdown('<h3 style="color:#E58A3A;">Eclipse frequency</h3>', unsafe_allow_html=True)
 
     yearly = filtered_df.groupby("Year").size()
 
-    st.line_chart(yearly)
+    st.line_chart(yearly, color="#FF0000A6")
 
-    st.header("Next Solar Eclipse")
+    st.markdown('<h2 style="color:#E58A3A;">Next Solar Eclipse</h2>', unsafe_allow_html=True)
 
     future = filtered_df.copy()
     future["Date"] = pd.to_datetime(
@@ -78,7 +82,7 @@ if response.status_code == 200:
         col2.metric("Type", eclipse["Eclipse Type"])
         col3.metric("Magnitude", f"{eclipse['Eclipse Magnitude']:.3f}")
 
-    st.header("Overview")
+    st.markdown('<h2 style="color:#C44A3D;">Overview</h2>',unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
@@ -86,7 +90,7 @@ if response.status_code == 200:
     col2.metric("Filtered eclipses", f"{len(filtered_df):,}")
     col3.metric("Eclipse types", filtered_df["Eclipse Type"].nunique())
 
-    st.subheader("Eclipse locations")
+    st.markdown('<h3 style="color:#E58A3A;">Eclipse locations</h3>', unsafe_allow_html=True)
 
     map_df = filtered_df[
         ["Latitude", "Longitude", "Eclipse Magnitude"]
@@ -119,7 +123,7 @@ if response.status_code == 200:
         size="size"
     )
 
-    st.subheader("Eclipse data")
+    st.markdown('<h3 style="color:#E58A3A;">Eclipse data</h3>', unsafe_allow_html=True)
 
     columns = [
         "Catalog Number",
