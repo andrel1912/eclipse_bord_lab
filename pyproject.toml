@@ -1,0 +1,17 @@
+[project]
+name = "eclipsebord"
+version = "0.1.0"
+description = "Solar eclipse dashboard"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ipykernel",
+    "matplotlib>=3.11.1",
+    "pandas>=3.0.5",
+]
+
+[tool.uv.workspace]
+members = [
+    "backend",
+    "frontend",
+]
