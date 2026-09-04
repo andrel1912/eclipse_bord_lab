@@ -1,3 +1,3 @@
 from pathlib import Path
 
-DATA_DIRECTORY = Path(__file__).parents[2] / "data"
+DATA_DIRECTORY = Path(__file__).resolve().parents[1] / "data"
